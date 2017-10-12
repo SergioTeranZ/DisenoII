@@ -93,10 +93,10 @@
     .2ex}{-1em}{\@titlestyle}}
 
 \renewcommand\abstract{\if@twocolumn
-\section*{Abstract}
+\section*{Abstract.}
 \else \small
 \begin{center}
-{\sffamily\bfseries Abstract\vspace{-.5em}\vspace{0pt}}
+{\sffamily\bfseries Abstract.\vspace{-.5em}\vspace{0pt}}
 \end{center}
 \quotation
 \fi}
