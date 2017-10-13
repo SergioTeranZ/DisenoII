@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.11)  13 OCT 2017 10:54
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.11)  13 OCT 2017 10:55
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1121,8 +1121,8 @@ Package rerunfilecheck Warning: File `ejemplo.out' has changed.
 (rerunfilecheck)                or use package `bookmark'.
 
 Package rerunfilecheck Info: Checksums for `ejemplo.out':
-(rerunfilecheck)             Before: BB5C234CAF913A31AC344DF136C16FC7;740
-(rerunfilecheck)             After:  2795B43F891332BCF744AEE782F70527;743.
+(rerunfilecheck)             Before: 2795B43F891332BCF744AEE782F70527;743
+(rerunfilecheck)             After:  4D254CD8CE1916BAA157A31574125CF8;746.
 Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 198.
  ) 
 Here is how much of TeX's memory you used:
@@ -1147,7 +1147,7 @@ msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on ejemplo.pdf (4 pages, 481535 bytes).
+Output written on ejemplo.pdf (4 pages, 481539 bytes).
 PDF statistics:
  179 PDF objects out of 1000 (max. 8388607)
  149 compressed objects within 2 object streams
