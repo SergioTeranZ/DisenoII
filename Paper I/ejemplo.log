@@ -1,4 +1,4 @@
-This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.11)  13 OCT 2017 08:43
+This is pdfTeX, Version 3.14159265-2.6-1.40.16 (TeX Live 2015/Debian) (preloaded format=pdflatex 2017.10.11)  13 OCT 2017 10:41
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -750,9 +750,6 @@ LaTeX Font Info:    Try loading font information for U+msb on input line 33.
 (/usr/share/texlive/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 )
-
-LaTeX Warning: Citation `c_resumen_01' on page 1 undefined on input line 36.
-
 Package babel Info: Redefining spanish shorthand <<
 (babel)             in language  on input line 48.
 Package babel Info: Redefining spanish shorthand >>
@@ -869,10 +866,6 @@ Package babel Info: Redefining spanish shorthand "!
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 84.
 
-
-LaTeX Warning: Citation `c_KP_01' on page 2 undefined on input line 87.
-
-
 Underfull \hbox (badness 1348) in paragraph at lines 85--88
 \OT1/cmr/m/n/10 El KP es un pro-ble-ma com-bi-na-to-rio que es NP-
  []
@@ -889,7 +882,7 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 89.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 89.
-<images/KP.png, id=68, 813.0375pt x 813.0375pt>
+<images/KP.png, id=84, 813.0375pt x 813.0375pt>
 File: images/KP.png Graphic file (type png)
  <use images/KP.png>
 Package pdftex.def Info: images/KP.png used on input line 94.
@@ -918,181 +911,216 @@ Package babel Info: Redefining spanish shorthand "!
 (babel)             in language  on input line 110.
 Package babel Info: Redefining spanish shorthand "?
 (babel)             in language  on input line 110.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 114.
- [2 <./images/KP.png>]
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 114.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 114.
 
+Underfull \hbox (badness 10000) in paragraph at lines 111--112
 
-LaTeX Warning: Citation `c_KP_02' on page 3 undefined on input line 115.
+ []
 
-<images/Vecindad.png, id=77, 813.0375pt x 813.0375pt>
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 112.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 112.
+[2 <./images/KP.png>]
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 113.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 113.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 113.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 113.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 113.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 113.
+ <images/Vecindad.png, id=97, 813.0375pt x 813.0375pt>
 File: images/Vecindad.png Graphic file (type png)
 
 <use images/Vecindad.png>
-Package pdftex.def Info: images/Vecindad.png used on input line 121.
+Package pdftex.def Info: images/Vecindad.png used on input line 120.
 (pdftex.def)             Requested size: 227.61172pt x 227.61172pt.
 Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 129.
+(babel)             in language  on input line 128.
 
-<images/best_imp-it-vs-ben_max.png, id=78, 578.16pt x 578.16pt>
+Underfull \hbox (badness 10000) in paragraph at lines 129--130
+
+ []
+
+<images/errores.png, id=98, 573.14125pt x 427.5975pt>
+File: images/errores.png Graphic file (type png)
+ <use images/errores.png>
+Package pdftex.def Info: images/errores.png used on input line 133.
+(pdftex.def)             Requested size: 256.0748pt x 191.04692pt.
+
+Overfull \hbox (15.1298pt too wide) in paragraph at lines 133--134
+[][] 
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 136--137
+
+ []
+
+<images/best_imp-it-vs-ben_max.png, id=99, 578.16pt x 578.16pt>
 File: images/best_imp-it-vs-ben_max.png Graphic file (type png)
 
 <use images/best_imp-it-vs-ben_max.png>
 Package pdftex.def Info: images/best_imp-it-vs-ben_max.png used on input line 1
-42.
-(pdftex.def)             Requested size: 227.61641pt x 227.61641pt.
-
-<images/first_imp-it-vs-ben_max.png, id=79, 578.16pt x 578.16pt>
-File: images/first_imp-it-vs-ben_max.png Graphic file (type png)
-
-<use images/first_imp-it-vs-ben_max.png>
-Package pdftex.def Info: images/first_imp-it-vs-ben_max.png used on input line 
-148.
+40.
 (pdftex.def)             Requested size: 227.61641pt x 227.61641pt.
 
 
 LaTeX Warning: `h' float specifier changed to `ht'.
 
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 152.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 168.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 168.
-[3 <./images/Vecindad.png> <./images/best_imp-it-vs-ben_max.png (PNG copy)>]
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 186.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand <<
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand >>
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "=
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "~
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "!
-(babel)             in language  on input line 186.
-Package babel Info: Redefining spanish shorthand "?
-(babel)             in language  on input line 186.
+<images/first_imp-it-vs-ben_max.png, id=100, 578.16pt x 578.16pt>
+File: images/first_imp-it-vs-ben_max.png Graphic file (type png)
 
-[4 <./images/first_imp-it-vs-ben_max.png (PNG copy)>]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 186.
+<use images/first_imp-it-vs-ben_max.png>
+Package pdftex.def Info: images/first_imp-it-vs-ben_max.png used on input line 
+145.
+(pdftex.def)             Requested size: 227.61641pt x 227.61641pt.
+
+
+LaTeX Warning: `h' float specifier changed to `ht'.
+
+
+Underfull \hbox (badness 1043) in paragraph at lines 148--150
+\OT1/cmr/m/n/10 ma-xi-mos en fun-ci^^Son de la can-ti-dad de ite-ra-cio-nes
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 148--150
+
+ []
+
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 150.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 150.
+[3 <./images/Vecindad.png> <./images/errores.png>]
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 152.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 152.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 152.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 152.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 152.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 152.
+
+Underfull \hbox (badness 10000) in paragraph at lines 153--154
+
+ []
+
+
+Underfull \hbox (badness 1577) in paragraph at lines 155--156
+\OT1/cmr/m/n/10 mien-tras que el me-to-do de LS man-tie-ne tiem-pos
+ []
+
+
+Underfull \hbox (badness 10000) in paragraph at lines 155--156
+
+ []
+
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 198.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand <<
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand >>
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "=
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "~
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "!
+(babel)             in language  on input line 198.
+Package babel Info: Redefining spanish shorthand "?
+(babel)             in language  on input line 198.
+[4 <./images/best_imp-it-vs-ben_max.png (PNG copy)> <./images/first_imp-it-vs-b
+en_max.png (PNG copy)>]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 198.
  (./ejemplo.aux
 LaTeX Info: Redefining \. on input line 24.
 LaTeX Info: Redefining \% on input line 24.
 )
-Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 186.
-Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 186.
-
-
-Package rerunfilecheck Warning: File `ejemplo.out' has changed.
-(rerunfilecheck)                Rerun to get outlines right
-(rerunfilecheck)                or use package `bookmark'.
-
-Package rerunfilecheck Info: Checksums for `ejemplo.out':
-(rerunfilecheck)             Before: E3122D4ED1705B94FA6357F9E184FCE3;556
-(rerunfilecheck)             After:  BB5C234CAF913A31AC344DF136C16FC7;740.
-
-LaTeX Warning: There were undefined references.
-
-
-LaTeX Warning: Label(s) may have changed. Rerun to get cross-references right.
-
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 186.
+Package atveryend Info: Executing hook `AtVeryEndDocument' on input line 198.
+Package atveryend Info: Executing hook `AtEndAfterFileList' on input line 198.
+Package rerunfilecheck Info: File `ejemplo.out' has not changed.
+(rerunfilecheck)             Checksum: BB5C234CAF913A31AC344DF136C16FC7;740.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 198.
  ) 
 Here is how much of TeX's memory you used:
- 8464 strings out of 494891
- 119078 string characters out of 6179038
- 226476 words of memory out of 5000000
- 11610 multiletter control sequences out of 15000+600000
+ 8475 strings out of 494891
+ 119250 string characters out of 6179038
+ 226626 words of memory out of 5000000
+ 11619 multiletter control sequences out of 15000+600000
  8743 words of font info for 33 fonts, out of 8000000 for 9000
  40 hyphenation exceptions out of 8191
- 29i,11n,45p,677b,471s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 29i,11n,45p,692b,464s stack positions out of 5000i,500n,10000p,200000b,80000s
 </usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx10.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmbx7.pfb></usr/share
 /texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmex10.pfb></usr/share/texli
@@ -1107,10 +1135,10 @@ msy10.pfb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy5.p
 fb></usr/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmsy7.pfb></us
 r/share/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti10.pfb></usr/shar
 e/texlive/texmf-dist/fonts/type1/public/amsfonts/cm/cmti9.pfb>
-Output written on ejemplo.pdf (4 pages, 454275 bytes).
+Output written on ejemplo.pdf (4 pages, 481486 bytes).
 PDF statistics:
- 163 PDF objects out of 1000 (max. 8388607)
- 134 compressed objects within 2 object streams
- 38 named destinations out of 1000 (max. 500000)
- 93 words of extra memory for PDF output out of 10000 (max. 10000000)
+ 179 PDF objects out of 1000 (max. 8388607)
+ 149 compressed objects within 2 object streams
+ 39 named destinations out of 1000 (max. 500000)
+ 122 words of extra memory for PDF output out of 10000 (max. 10000000)
 
