@@ -1,6 +1,6 @@
 -- --------------------------------------------------
 -- Entrega 1 : 	Resolución del problema de la mochila 
---				con Programción Dinámica
+--				con Progrmacion Dinámica
 --
 --Autores:
 -- 	Marialicia Suarez

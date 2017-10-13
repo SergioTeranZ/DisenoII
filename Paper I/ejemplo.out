@@ -1,2 +1,12 @@
-\BOOKMARK [1][-]{section.1}{Una secci\363n cualquiera}{}% 1
-\BOOKMARK [1][-]{section.2}{Otra secci\363n}{}% 2
+\BOOKMARK [1][-]{section.1}{Introducci\363n.}{}% 1
+\BOOKMARK [1][-]{section.2}{Busqueda Local.}{}% 2
+\BOOKMARK [2][-]{subsection.2.1}{Estrategias.}{section.2}% 3
+\BOOKMARK [3][-]{subsubsection.2.1.1}{Mejor Mejora.}{subsection.2.1}% 4
+\BOOKMARK [3][-]{subsubsection.2.1.2}{Primer Mejora.}{subsection.2.1}% 5
+\BOOKMARK [1][-]{section.3}{Problema de la Mochila.}{}% 6
+\BOOKMARK [2][-]{subsection.3.1}{Formulaci\363n.}{section.3}% 7
+\BOOKMARK [2][-]{subsection.3.2}{Funci\363n objetivo.}{section.3}% 8
+\BOOKMARK [1][-]{section.4}{Busqueda local para KP.}{}% 9
+\BOOKMARK [2][-]{subsection.4.1}{Estructura de vecindad.}{section.4}% 10
+\BOOKMARK [1][-]{section.5}{Resultados.}{}% 11
+\BOOKMARK [1][-]{section.6}{Discusi\363n y Conclusiones.}{}% 12
