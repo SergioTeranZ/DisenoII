@@ -7,9 +7,6 @@
 \usepackage{paralist}
 \usepackage[ruled,vlined,linesnumbered]{algorithm2e}
 
-\usepackage{fancyvrb}
-\DefineVerbatimEnvironment{code}{Verbatim}{fontsize=\small}
-
 \graphicspath{ {images/} }
 
 %----------------------- Macros and Definitions --------------------------
@@ -131,6 +128,26 @@
 
 \section{Resultados.}
 	Para la implementación del algoritmo de programacion dinamica se utilizo el lenguaje de programación Haskell, mientras que para los algoritmos de LS se utilizo el lenguaje de programación Python. Para los casos de uso se utilizaron dos \textit{laptops}, para los casos en Haskell se utilizo un procesador Core i3 con 2Gb de RAM, y para los casos en Python se utilizo tambien un procesador i3 con 4Gb de memoria RAM. Luego de hacer 10 casos de prueba distintos, donde se varian la cantidad de items en $V$ desde 10 hasta 50, se presentan los resultados, comparando los optimos obtenidos para cada caso.\\
+	En las figuras 4 y 5 se muestran los beneficios maximos en función de la cantidad de iteraciones bajo la estrategia de \textit{best-improvement} (BI) y \textit{first-improvement} (FI) respectivamente, el caso BI describe un crecimiento casi lineal hasta llegar a un valor maximo, mientras que el caso FI tarda mas en crecer. Se puede ver en la tabla 1 (Figura 3) que ambos metodos convergen hacia optimos muy similares, sin embargo, las figuras 4 y 5 evidencia que el metodo BI converge en menos iteraciones que FI para todos los casos.
+
+ 	\begin{figure}[h]
+	 	\caption{Tabla 1: Comparacion resultados por caso de prueba}
+
+
+	\end{figure}
+
+ 	\begin{figure}[h]
+ 	\caption{Grafica 1: Regla Mejor Mejora}
+	
+	\includegraphics[width=8cm, height=8cm]{best_imp-it-vs-ben_max.png}
+	\end{figure}
+
+ 	\begin{figure}[h]
+ 	\caption{Grafica 2: Regla Primer Mejora}
+	
+	\includegraphics[width=8cm, height=8cm]{first_imp-it-vs-ben_max.png}
+	\end{figure}
+
 
 \section{Discusión y Conclusiones.}
 	Aquí concluyen.
