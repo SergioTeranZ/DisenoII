@@ -32,7 +32,7 @@ def Busqueda_mejor_vecino(elementos,vecindad,beneficio_acual,capacidad):
 	Mejor_vecindad=list(vecindad)
 	
 	for i in range(len(vecindad)):
-		Nueva= list(vecindad)
+		
 		Nueva[i]=int(not vecindad[i])
 		nuevo_bene,nuevo_peso=Evaular_Vecindad(Nueva,elementos)
 
@@ -67,22 +67,14 @@ def Evaular_Vecindad(vecindad,elementos):
 	return beneficio_acual,peso_actual
 
 
-pb=[]
-#for i in range(0,49):
-#	pb=pb+[(random.randrange(99)+1,random.randrange(99)+1)]
 
 def ls(pb,capacidad):
-	#capacidad=capacidad=random.randrange(500)+50
-
-	#print pb
-	#print "Capacidad Inicial: "+str(capacidad)
 
 
 	nuevo_bene=0
 	Mejor_vecindad,Mayor_Beneficio= [0]*len(pb),0
 	diferente=True
 
-	#print "Mejor Vecino:"
 	it = 0
 	while diferente:
 		nuevo_bene,Mejor_vecindad=Busqueda_mejor_vecino(pb,Mejor_vecindad,Mayor_Beneficio,capacidad)
@@ -98,7 +90,6 @@ def ls(pb,capacidad):
 	Mejor_vecindad,Mayor_Beneficio= [0]*len(pb),0
 	diferente=True
 
-	#print "Cualquier Vecino:"
 	it = 0
 	while diferente:
 		nuevo_bene,Mejor_vecindad=Busqueda_buen_vecino(pb,Mejor_vecindad,Mayor_Beneficio,capacidad)
@@ -106,10 +97,8 @@ def ls(pb,capacidad):
 			Mayor_Beneficio=nuevo_bene
 		else:
 			diferente=False
-		#print str(Mayor_Beneficio)
 		it = it +1
 
-	#print str(it)+","+str(Mayor_Beneficio)
 	print "-"
 
 # 10
