@@ -1,4 +1,6 @@
 #Buesqueda Local Iterada 
+#[0] beneficio
+#[1] peso
 
 import random
 from time import time
@@ -10,16 +12,16 @@ def Sol_inicial(lista,cap):
 	Mochila=[0]*len(lista)
 	intentos_fallidos=25
 	indices=[];
-	i=1000
+	i=len(elementos)/5
 
 	while capacidad>0 and i>0:
 
 		indice=random.randrange(len(elementos))
 		elemento=elementos[indice]
 		
-		if (capacidad-elemento[0]>=0 and not (indice in indices)):
-			capacidad=capacidad-elemento[0]
-			Beneficio_total=Beneficio_total+elemento[1]
+		if (capacidad-elemento[1]>=0 and not (indice in indices)):
+			capacidad=capacidad-elemento[1]
+			Beneficio_total=Beneficio_total+elemento[0]
 			Mochila[indice]=1
 			indices=indices+[indice]
 		
@@ -62,8 +64,8 @@ def Evaular_Vecindad(vecindad,elementos):
 	beneficio_acual=0
 	peso_actual=0
 	for i in range(len(vecindad)):
-		beneficio_acual=beneficio_acual+elementos[i][1]*vecindad[i]
-		peso_actual=peso_actual+elementos[i][0]*vecindad[i]
+		beneficio_acual=beneficio_acual+elementos[i][0]*vecindad[i]
+		peso_actual=peso_actual+elementos[i][1]*vecindad[i]
 	return beneficio_acual,peso_actual
 
 def ls_mejor_vecino(pb,capacidad,Sol_inicial):
@@ -108,26 +110,73 @@ def ls_primer_vecino(pb,capacidad,Sol_inicial):
 	# print "---"
 	return Mayor_Beneficio,it
 
+def Generar_Sols(lista,cap):
+	Sols=[]
+	a=[]
+	for i in range(0,29):
+		a=Sol_inicial(lista,cap)
+		Sols=Sols+[a]
+	return Sols
 
-l=[(1, 9), (1, 19), (2, 13), (3, 8), (4, 3), (4, 14), (6, 14), (10, 13), (16, 12)]
-capacidad=30
+def ls_iterada(l,capacidad,Sol_inicial):
+	a,b,it,mayor=0,0,0,0
+	cota_sup=len(Sol_inicial)
+
+	tiempo_inicial = time() 
+	for i in Sol_inicial:
+		b,a=ls_primer_vecino(l,capacidad,i)
+		if b>mayor:
+			it,mayor=a,b
+	tiempo_final = time() 
+
+	tiempo_ejecucion = tiempo_final - tiempo_inicial
+
+	print "Primer Vecino"
+	print "Beneficio: " + str(mayor)
+	print "Duracion: "+str(tiempo_ejecucion)
+	print "Numero de Iteraciones: "+str(it)
+	print "-----------------------------"
 
 
-a,b,it,acum=0,0,0,0
-cota_sup=1000
-tiempo_inicial = time() 
-for i in range(1,cota_sup):
-	Sol=Sol_inicial(l,capacidad)
-	b,a=ls_primer_vecino(l,capacidad,Sol)
-	it,acum=it+a,b+acum
-acum,it=acum/cota_sup, it/cota_sup
-tiempo_final = time() 
+	a,b,it,mayor=0,0,0,0
 
-tiempo_ejecucion = tiempo_final - tiempo_inicial
+	tiempo_inicial = time() 
+	for i in Sol_inicial:
+		b,a=ls_mejor_vecino(l,capacidad,i)
+		if b>mayor:
+			it,mayor=a,b
+	tiempo_final = time() 
 
-print acum
-print tiempo_ejecucion
-print it
+	tiempo_ejecucion = tiempo_final - tiempo_inicial
+
+	print "Mejor Vecino"
+	print "Beneficio: " + str(mayor)
+	print "Duracion: "+str(tiempo_ejecucion)
+	print "Numero de Iteraciones: "+str(it)
+	print "-----------------------------"
+
+nombres=['f1_l-d_kp_10_269','f2_l-d_kp_20_878','f3_l-d_kp_4_20','f4_l-d_kp_4_11','f6_l-d_kp_10_60','f7_l-d_kp_7_50','f8_l-d_kp_23_10000','f9_l-d_kp_5_80','f10_l-d_kp_20_879']
+
+for i in nombres:
+
+	ruta="../low-dimensional/"+i
+
+	archivo = open(ruta, "r")
+
+	linea=archivo.readline()
+	capacidad= linea.split(" ")[1]
+	capacidad=int(capacidad.split('\ ')[0])
+	l=[]
+
+	for linea in archivo.readlines():
+
+		b,p=int(linea.split(" ")[0]),int((linea.split(" ")[1]).split('\ ')[0])
+		l=l+[(b,p)]
+
+	print "Problema: "+i
+	#print l
+	Sol=Generar_Sols(l,capacidad)
+	ls_iterada(l,capacidad,Sol)
 
 
 
