@@ -1,40 +1,22 @@
 import random
-
-def Leer():
-	c = 269
-	x = [(55, 95),(10, 4),(47, 60),(5, 32),(4, 23),(50, 72),(8, 80),(61, 62),(85, 65),(87, 46)]
-	return c,x
-
-def solVal(a,b,c):
-	m = 0
-	for i in range(len(a)) :
-		m = m + a[i]*b[i][1]
-	
-	if m < c:
-		return True
-
-	return False
+import math
+from time import time
 
 def Generar(c,l):
 	pob = []
 	i = 0
-	while len(pob) != len(l):
+	while len(pob) < abs(len(l)/(int(math.log(len(l),2)))):
 		p = [random.randint(0,1) for _ in range(len(l))]
-		#if solVal(p,l,c):
-		#	pob = pob + [p]
 		pob = pob + [p]
 	return pob
 
-def pickRandom(p,c):
-	rndI = 0
+def pickRandom(p):
+	rndI = random.randint(0,len(p)-1)
 	while p[rndI] != 1:
 		rndI = random.randint(0,len(p)-1)
-		if p[rndI] == 1 :
-			return rndI
 	return rndI
 
 def Salud(pob,cro,c):
-
 	benT = []
 	pesT = []
 
@@ -50,59 +32,59 @@ def Salud(pob,cro,c):
 			item = cromosoma[i]
 			itemCr = cro[i]
 			# si esta en incluido (bit = 1)
-			if item == 1 :
-				# agregar su peso y beneficio a los pesos y beneficios totales
-				benT[cr] = benT[cr] + itemCr[0]
-				pesT[cr] = pesT[cr] + itemCr[1]
+			# agregar su peso y beneficio a los pesos y beneficios totales
+			benT[cr] = benT[cr] + itemCr[0]*item
+			pesT[cr] = pesT[cr] + itemCr[1]*item
 		
 			# Si la capacidad total es MENOR que el volumen total
+			
+			#if c < pesT[cr]:
 			while  c < pesT[cr] :
 				# escoger de manera aleatoria items del cromosoma hasta obtener uno que este en el el volumen total
-				rndItem = pickRandom(cromosoma,cro)
+				rndItem = pickRandom(cromosoma)
 
 				# Sacar ese item del volumen total (cambiar bit = 0)
-				cromosoma[rndItem] = 0
-				benT[cr] = benT[cr] - cro[rndItem][0]
-				pesT[cr] = pesT[cr] - cro[rndItem][1]
+				if benT[cr] - cro[rndItem][0] >= 0:
+					cromosoma[rndItem] = 0
+					benT[cr] = benT[cr] - cro[rndItem][0]
+					pesT[cr] = pesT[cr] - cro[rndItem][1]
 	return benT
 
 def porcentaje(item,l):
 	t = 0
-	for i in range(len(l)):
-		if l[i] == item :
+	for i in l:
+		if i == item :
 			t = t + 1
 	return (t*1.0)/len(l)
 
-def Chequear(salud,cro):
+def Chequear(salud):
 	unique = sorted(list(set(salud)))
-	for u in range(len(unique)):
-		if porcentaje(unique[u],salud) > 0.9 :
+	for u in unique:
+		if porcentaje(u,salud) > 0.9 :
 			return True
 	return False
 
 # Roulette Whell Solution
 def Seleccionar(fitness,poblacion):
-	parents = []
-	for i in range(len(fitness)):
-		parents = parents + [(fitness[i],i)]
-	
-	roulette = list(reversed(sorted(parents)))
 	porcentajes = []
-
+	whell = [0]*10
+	rnd = 0
+	p1  = 0
+	p2  = 1
 	total = 0
-	for i in fitness:
-		total = total + i
+
+	total = sum(fitness)
 
 	for j in range(len(fitness)):
-		porcentajes = porcentajes + [fitness[j]/total]
-
-	whell = []
-	for k in range(len(porcentajes)):
-		a = [k]*int((porcentajes[k]*100)//1)
+		porcentajes = porcentajes + [(j,fitness[j]/total)]
+		a = [j]*( int( (porcentajes[j][1]*100) ) )
 		whell = whell + a
-
-	p1 = whell[random.randint(0,len(whell)-1)]
-	p2 = whell[random.randint(0,len(whell)-1)]
+		
+	if len(whell) != 0:
+		rnd = random.randint(0,len(whell)-1)
+		p1 = whell[rnd]
+		if rnd != 0 :
+			p2 = whell[rnd-1]
 
 	return poblacion[p1],poblacion[p2]
 
@@ -142,23 +124,26 @@ def devolverMayor(fitnessT,i):
 	for j in range(len(fitnessT)):
 		if porcentaje(fitnessT[j],fitnessT) > pcMayor:
 			mayor = fitnessT[j]
-	print('iteracion: '+str(i))
-	print('Optimo: '+str(mayor))
+	print('Optimo Obte: '+str(mayor)+' hallado en iteracion: '+str(i))
 	return mayor
 
 def devolverMayorItem(fitnessT,j):
-	mejor = 0
-	for i in fitnessT:
-		if i > mejor:
-			mejor = i
-	print('iteracion: '+str(j))
-	print('Optimo: '+str(mejor))
+	mejor = max(fitnessT)
+	
+	print('Optimo Obte: '+str(mejor)+' hallado en iteracion: '+str(j))
 	return mejor
 
-def AGS(maxI,cruce,mutar):
-	# Leer archivo de entrada
-	[cap,cromosomas] = Leer()
+def Error(p,pC):
+	return abs(p-pC)/p
 
+def etiquetar(la,lb):
+	lc = []
+	for i in range(len(la)):
+		lc = lc + [(la[i],lb[i])]
+	return lc
+
+def AGS(cap,cromosomas,maxI,cruce,mutar):
+	tiempo_inicial = time() 
 	# Generar Poblacion inicial de tamaño Cromosomas
 	poblacion = Generar(cap,cromosomas)
 	
@@ -167,35 +152,113 @@ def AGS(maxI,cruce,mutar):
 
 	i = 0
 	while i < maxI:
-		nuevaGeneracion = []
+		#nuevaGeneracion = []
 
 		# Verificar que porcentaje de la poblacion tiene el mismo porcentaje de salud
 		# Si mas del 90% de la poblacion NO es saludable
-		if not Chequear(fitnessT,cromosomas):
+		if not Chequear(fitnessT):
+		#	for _ in range( int(len(poblacion)/2) ):
+			# Seleccionar dos cromosomas de la poblacion
+			[parent1,parent2]  = Seleccionar(fitnessT,poblacion)
 
-			for gen in range(len(poblacion)//2):
-				# Seleccionar dos cromosomas de la poblacion
-				[parent1,parent2]  = Seleccionar(fitnessT,poblacion)
+			# Cruzar ambos cromosomas
+			[child1,child2] = Cruzar(parent1,parent2,cruce)
 
-				# Cruzar ambos cromosomas
-				[child1,child2] = Cruzar(parent1,parent2,cruce)
+			# Mutar los cromosomas obtenidos
+			mutante1 = Mutar(child1,mutar)
+			mutante2 = Mutar(child2,mutar)
 
-				# Mutar los cromosomas obtenidos
-				mutante1 = Mutar(child1,mutar)
-				mutante2 = Mutar(child2,mutar)
-
-				nuevaGeneracion = nuevaGeneracion + [mutante1,mutante2]
-		
-			# Calcular salud de cada cromosoma
-			fitnessT = Salud(nuevaGeneracion,cromosomas,cap)
+			#nuevaGeneracion = nuevaGeneracion + [mutante1,mutante2]
+			
+			poblacion[0] = mutante1
+			poblacion[1] = mutante2
+			fitnessT = Salud(poblacion,cromosomas,cap)
 		
 		# Si mas del 90% de la poblacion SI es saludable
 		else:
 			# Si el numero de iteracion ha superado limite o el 90% es saludable PARAR
+			tiempo_final = time() 
+			tiempo_ejecucion = tiempo_final - tiempo_inicial
+			print('Duracion: '+str(tiempo_ejecucion))
 			return devolverMayor(fitnessT,i)
 
+		# Calcular salud de cada cromosoma
 		# Si el numero de iteracion NO ha superado limite o el 90% aun NO es saludable repetir ciclo
 		i = i+1
-	devolverMayorItem(fitnessT,i)
+	tiempo_final = time() 
+	tiempo_ejecucion = tiempo_final - tiempo_inicial
+	print('Duracion: '+str(tiempo_ejecucion))
+	return devolverMayorItem(fitnessT,i)
 
-AGS(400,0.75,0.005)
+maxIt = 400
+pCruce = 0.85
+pMutar = 0.001
+
+print('----------------------------------------------------\n LOW DIMENSION \n----------------------------------------------------')
+
+#nombres_low=['f1_l-d_kp_10_269','f2_l-d_kp_20_878','f3_l-d_kp_4_20','f4_l-d_kp_4_11','f6_l-d_kp_10_60','f7_l-d_kp_7_50','f8_l-d_kp_23_10000','f9_l-d_kp_5_80','f10_l-d_kp_20_879']
+#optimos_low=['f1_l-d_kp_10_269','f2_l-d_kp_20_878','f3_l-d_kp_4_20','f4_l-d_kp_4_11','f6_l-d_kp_10_60','f7_l-d_kp_7_50','f8_l-d_kp_23_10000','f9_l-d_kp_5_80','f10_l-d_kp_20_879']
+nombres_low=[]
+optimos_low=[]
+
+for i in range(len(nombres_low)):
+
+	ruta_low="../../low-dimensional/"+nombres_low[i]
+	ruta_Op_low="../../low-dimensional-optimum/"+optimos_low[i]
+
+	archivo = open(ruta_low, "r")
+	archivo_Op = open(ruta_Op_low, "r")
+
+	linea=archivo.readline()
+	linea_Op=archivo_Op.readline()
+
+	optimo = linea_Op
+
+	capacidad= linea.split(" ")[1]
+	capacidad=int(capacidad.split('\ ')[0])
+	l=[]
+
+	for linea in archivo.readlines():
+
+		b,p=int(linea.split(" ")[0]),int((linea.split(" ")[1]).split('\ ')[0])
+		l=l+[(b,p)]
+
+	print("---------------------\nProblema: "+nombres_low[i])
+	opAGS = AGS(capacidad,l,maxIt,pCruce,pMutar)
+	e = Error(int(optimo),opAGS)
+	print('Optimo Real: '+ optimo)
+	print('Error: '+ str(e))
+
+print('----------------------------------------------------\n LARGE SCALE \n----------------------------------------------------')
+
+#nombres_large=['knapPI_3_100_1000_1','knapPI_3_200_1000_1','knapPI_3_500_1000_1','knapPI_3_1000_1000_1','knapPI_3_2000_1000_1','knapPI_3_5000_1000_1','knapPI_1_10000_1000_1','knapPI_2_10000_1000_1','knapPI_3_10000_1000_1']
+nombres_large=['knapPI_3_100_1000_1']
+
+
+for i in range(len(nombres_large)):
+
+	ruta_large="../../large_scale/"+nombres_large[i]
+	ruta_Op_large="../../large_scale-optimum/"+nombres_large[i]
+
+	archivo = open(ruta_large, "r")
+	archivo_Op = open(ruta_Op_large, "r")
+
+	linea=archivo.readline()
+	linea_Op=archivo_Op.readline()
+
+	optimo = linea_Op
+
+	capacidad= linea.split(" ")[1]
+	capacidad=int(capacidad.split('\ ')[0])
+	l=[]
+
+	for linea in archivo.readlines():
+
+		b,p=int(linea.split(" ")[0]),int((linea.split(" ")[1]).split('\ ')[0])
+		l=l+[(b,p)]
+
+	print("---------------------\nProblema: "+nombres_large[i])
+	opAGS = AGS(capacidad,l,maxIt,pCruce,pMutar)
+	e = Error(int(optimo),opAGS)
+	print('Optimo Real: '+ optimo)
+	print('Error: '+ str(e))
