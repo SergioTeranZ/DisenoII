@@ -21,10 +21,10 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 	tiempoI = time() 
 	# Generar Poblacion inicial de tamaño Cromosomas
 	poblacion = Generate(cap,cromosomas)
-	poblacion.Identify()
+	#poblacion.Identify()
 	
 	i = 0
-	'''
+	
 	while i < maxI:
 		# Calcular salud de cada cromosoma
 		poblacion.Health(cura)
@@ -58,7 +58,7 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 
 		# Si el numero de iteracion NO ha superado limite o el 90% aun NO es saludable entonces repetir el ciclo
 		i = i+1
-	'''
+	
 	tiempoF = time() 
 	tiempoT = tiempoF - tiempoI
 	[best,error] = poblacion.ReturnBest(optimo)
@@ -97,7 +97,6 @@ def comparar(a,b):
 	return dif
 
 def CorrerSGA(maxIt,pCruce,pMutar,tCura,scale,nombre):
-	#for file in range(len(nombres)):
 
 	ruta   ="../../"+scale+"/"+nombre
 	rutaOp ="../../"+scale+"-optimum/"+nombre
@@ -141,12 +140,12 @@ def promedios(iMax,c,m,t,times,scale,nombres):
 		itP = sum(its)/len(its)
 		tP = sum(ts)/len(ts)
 		#printResultado(optimoP,opSGAP,eP,itP,tP,f)
-		#printResultadoTabla(optimoP,opSGAP,eP,itP,tP,f)
+		printResultadoTabla(optimoP,opSGAP,eP,itP,tP,f)
 
 def correr(iMax,c,m,times):
-	#print('=================================================================================================================\n\n\n LOW DIMENSION \n\n\n=================================================================================================================')
+	print('=================================================================================================================\n\n\n LOW DIMENSION \n\n\n=================================================================================================================')
 	nombres_low = ["f4_l-d_kp_4_11","f3_l-d_kp_4_20","f9_l-d_kp_5_80","f7_l-d_kp_7_50","f6_l-d_kp_10_60","f1_l-d_kp_10_269","f2_l-d_kp_20_878","f10_l-d_kp_20_879","f8_l-d_kp_23_10000"]
-	#promedios(iMax,c,m,0.955,times,"low-dimensional",nombres_low)
+	promedios(iMax,c,m,0.955,times,"low-dimensional",nombres_low)
 
 	print('=================================================================================================================\n\n\n LARGE SCALE \n\n\n=================================================================================================================')	
 
