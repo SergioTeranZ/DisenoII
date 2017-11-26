@@ -22,10 +22,11 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 	# Generar Poblacion inicial de tamaño Cromosomas
 	poblacion = Generate(cap,cromosomas)
 	#poblacion.Identify()
+	#poblacion.Health(cura)
 	
 	i = 0
 	
-	while i < maxI:
+	while i < maxI: 
 		# Calcular salud de cada cromosoma
 		poblacion.Health(cura)
 
@@ -50,10 +51,11 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 		# Si mas del 90% de la poblacion SI es saludable
 		else:
 			# Si el numero de iteracion ha superado limite o el 90% es saludable PARAR
-			tiempoF = time() 
-			tiempoT = tiempoF - tiempoI
-			[best,error] = poblacion.ReturnBest(optimo)
-			return [best,i,tiempoT,error]
+			if i > 3:
+				tiempoF = time() 
+				tiempoT = tiempoF - tiempoI
+				[best,error] = poblacion.ReturnBest(optimo)
+				return [best,i,tiempoT,error]
 		
 
 		# Si el numero de iteracion NO ha superado limite o el 90% aun NO es saludable entonces repetir el ciclo
@@ -71,7 +73,7 @@ def truncate(n,m):
 	i,p,d = s.partition('.')
 	return '.'.join([i, (d+'0'*m)[:m]])
 
-def printResultado(optimo,obtenido,error,iteracion,tiempo,file):
+def printResultado(optimo,obtenido,error,iteracion,tiempo):
 	print("Optimo: "+str(optimo))
 	print("Resultado: "+str(obtenido))
 	print("Error: "+str(error))
@@ -120,6 +122,8 @@ def CorrerSGA(maxIt,pCruce,pMutar,tCura,scale,nombre):
 	l = l[0:len(l)-1]
 
 	[opSGA,j,t,e] = SGA(capacidad,l,maxIt,pCruce,pMutar,tCura,optimo)
+	#printResultado(optimo,opSGA.beneficio,e,j,t)
+
 	return int(optimo),opSGA.beneficio,e,j,t
 
 def promedios(iMax,c,m,t,times,scale,nombres):
@@ -150,31 +154,37 @@ def correr(iMax,c,m,times):
 	print('=================================================================================================================\n\n\n LARGE SCALE \n\n\n=================================================================================================================')	
 
 	print('=================================================================================================================\n\n UNCORRELATED \n\n=================================================================================================================')
-	nombres_large_u = ["knapPI_1_100_1000_1","knapPI_1_200_1000_1","knapPI_1_500_1000_1","knapPI_1_1000_1000_1","knapPI_1_2000_1000_1","knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u)
+	nombres_large_u_500 = ["knapPI_1_100_1000_1","knapPI_1_200_1000_1","knapPI_1_500_1000_1"]
+	nombres_large_u_1000_10000 = ["knapPI_1_1000_1000_1","knapPI_1_2000_1000_1","knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
+	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u_500)
+	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u_1000_10000)
 	
-	#print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
-	nombres_large_w = ["knapPI_2_100_1000_1","knapPI_2_200_1000_1","knapPI_2_500_1000_1","knapPI_2_1000_1000_1","knapPI_2_2000_1000_1","knapPI_2_5000_1000_1","knapPI_2_10000_1000_1"]
-	#promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w)
+	print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
+	nombres_large_w_500 = ["knapPI_2_100_1000_1","knapPI_2_200_1000_1","knapPI_2_500_1000_1"]
+	nombres_large_w_1000_10000 = ["knapPI_2_1000_1000_1","knapPI_2_2000_1000_1","knapPI_2_5000_1000_1","knapPI_2_10000_1000_1"]
+	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w_500)
+	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w_1000_10000)
 	
 	print('=================================================================================================================\n\n STRONGLY \n\n=================================================================================================================')
-	nombres_large_s = ["knapPI_3_100_1000_1","knapPI_3_200_1000_1","knapPI_3_500_1000_1","knapPI_3_1000_1000_1","knapPI_3_2000_1000_1","knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
-	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s)
+	nombres_large_s_500 = ["knapPI_3_100_1000_1","knapPI_3_200_1000_1","knapPI_3_500_1000_1"]
+	nombres_large_s_1000_10000 = ["knapPI_3_1000_1000_1","knapPI_3_2000_1000_1","knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
+	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s_500)
+	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s_1000_10000)
 
 
 def test(iMax,c,m,times):
 	s = str(100)
 	#print('=================================================================================================================\n\n\n PRUEBA \n\n\n=================================================================================================================')	
 
-	print('=================================================================================================================\n\n UNCORRELATED \n\n=================================================================================================================')
+	#print('=================================================================================================================\n\n UNCORRELATED \n\n=================================================================================================================')
 	nombres_large_u = ["knapPI_1_100_1000_1","knapPI_1_200_1000_1","knapPI_1_500_1000_1","knapPI_1_1000_1000_1","knapPI_1_2000_1000_1","knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
 	#nombres_large_u = ["knapPI_1_"+s+"_1000_1"]
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u)
+	#promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u)
 	
-	print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
+	#print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
 	nombres_large_w = ["knapPI_2_100_1000_1","knapPI_2_200_1000_1","knapPI_2_500_1000_1","knapPI_2_1000_1000_1","knapPI_2_2000_1000_1","knapPI_2_5000_1000_1","knapPI_2_10000_1000_1"]
 	#nombres_large_w = ["knapPI_2_"+s+"_1000_1"]
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w)
+	#promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w)
 	
 	print('=================================================================================================================\n\n STRONGLY \n\n=================================================================================================================')
 	nombres_large_s = ["knapPI_3_100_1000_1","knapPI_3_200_1000_1","knapPI_3_500_1000_1","knapPI_3_1000_1000_1","knapPI_3_2000_1000_1","knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
@@ -182,7 +192,7 @@ def test(iMax,c,m,times):
 	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s)
 
 
-#correr(40,0.85,0.001,10)
-test(40,0.85,0.001,1)
+correr(40,0.85,0.001,5)
+#test(40,0.85,0.001,5)
 
 

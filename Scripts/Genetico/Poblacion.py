@@ -31,15 +31,14 @@ class Poblacion:
 		self.beneficios = []
 		self.pesos = []
 		for c in self.generacion:
-			c.pesar(self.bag)
+			c.pesar(self.bag,self.capacidad)
 			self.beneficios += [c.beneficio]
 			self.pesos += [c.peso]
 
 	def Health(self,tol):
 		for c in self.generacion:
 			k = 0
-			while (not c.salud) and (k < 10):
-				#print("verga estoy con "+str(c.posicion))
+			while (not c.salud) and (k < len(self.bag)):
 				c.curar(self.bag,self.capacidad,tol)
 				c.diagnosticar(self.capacidad)
 				k += 1
@@ -60,7 +59,7 @@ class Poblacion:
 
 	def Check(self):
 		for c in self.generacion:
-			if (self.beneficios.count(c.beneficio)/len(self.generacion) > 0.85) :
+			if (self.beneficios.count(c.beneficio)/len(self.generacion) > 0.90) :
 				return True
 
 		return False
@@ -75,7 +74,8 @@ class Poblacion:
 				wheel += [((b/total)*100,b)]*self.beneficios.count(b)
 		wheel = sorted(wheel)
 
-		rnd = random.sample(wheel,2)
+		#rnd = random.sample(wheel,2)
+		rnd = [wheel[0],wheel[len(wheel)-2]]
 
 		p1 = self.beneficios.index(rnd[0][1])
 		p2 = self.beneficios.index(rnd[1][1])
