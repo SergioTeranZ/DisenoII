@@ -97,23 +97,7 @@ def cambiar_solucion(Sol):
 
 	return nueva_solucion
 
-def ls_iterada(l,capacidad,sol_inicial):
-	a,b,it,mayor=0,0,0,0
 
-	tiempo_inicial = time() 
-	for i in range(0,99):
-		b,a,mejor_vecindad=ls_mejor_vecino(l,sol_inicial,capacidad)
-		if b>mayor:
-			it,mayor=a,b
-		sol_inicial=cambiar_solucion(mejor_vecindad)
-
-	tiempo_final = time() 
-
-	tiempo_ejecucion = tiempo_final - tiempo_inicial
-
-	print "Mejor Vecino"
-	print str(mayor) +" " +str(it)+" " +str(tiempo_ejecucion)
-	print "-----------------------------"
 
 nombres2=["knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
 
