@@ -3,32 +3,18 @@ import math
 from time import time
 from Cromosoma import Cromosoma
 from Poblacion import Poblacion
+import sys
+from helpMethods import *
 
-def Generate(c,bag):
-	p = Poblacion(c,bag)
-	i = 0
-	l = len(bag)
-	size = int(l/math.log(l,2))
-	#size = int(l/2)
-	
-	for i in range(size):
-		info = [random.randint(0,1) for _ in range(l)]
-		crom = Cromosoma(info,i,bag,c)
-		p.generacion += [crom]
-	return p
-
-def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
+def SGA(cap,cromosomas,maxI,cruce,mutar,optimo):
 	tiempoI = time() 
 	# Generar Poblacion inicial de tamaño Cromosomas
 	poblacion = Generate(cap,cromosomas)
-	#poblacion.Identify()
-	#poblacion.Health(cura)
 	
 	i = 0
-	
-	while i < maxI: 
+	while i < maxI:
 		# Calcular salud de cada cromosoma
-		poblacion.Health(cura)
+		poblacion.Health()
 
 		# Verificar que porcentaje de la poblacion tiene el mismo porcentaje de salud
 		# Si mas del 90% de la poblacion NO es saludable
@@ -46,17 +32,15 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 			poblacion.Insert([mutante1,mutante2,poblacion.generacion[father],poblacion.generacion[mother]])
 
 			# Calcular salud de cada cromosoma
-			poblacion.Health(cura)
+			poblacion.Health()
 		
 		# Si mas del 90% de la poblacion SI es saludable
 		else:
 			# Si el numero de iteracion ha superado limite o el 90% es saludable PARAR
-			if i > 3:
-				tiempoF = time() 
-				tiempoT = tiempoF - tiempoI
-				[best,error] = poblacion.ReturnBest(optimo)
-				return [best,i,tiempoT,error]
-		
+			tiempoF = time() 
+			tiempoT = tiempoF - tiempoI
+			[best,error] = poblacion.ReturnBest(optimo)
+			return [best,i,tiempoT,error]
 
 		# Si el numero de iteracion NO ha superado limite o el 90% aun NO es saludable entonces repetir el ciclo
 		i = i+1
@@ -66,133 +50,99 @@ def SGA(cap,cromosomas,maxI,cruce,mutar,cura,optimo):
 	[best,error] = poblacion.ReturnBest(optimo)
 	return [best,i,tiempoT,error]
 
-def truncate(n,m):
-	s = '{}'.format(n)
-	if 'e' in s or 'E' in s:
-		return '{0:.{1}f}'.format(n,m)
-	i,p,d = s.partition('.')
-	return '.'.join([i, (d+'0'*m)[:m]])
+def Generate(c,bag):
+	p = Poblacion(c,bag)
+	i = 0
+	l = len(bag)
 
-def printResultado(optimo,obtenido,error,iteracion,tiempo):
-	print("Optimo: "+str(optimo))
-	print("Resultado: "+str(obtenido))
-	print("Error: "+str(error))
-	#print("Error: "+str(error*100)+"%")
-	print("Iteracion: "+str(iteracion))
-	print("Tiempo: "+str(tiempo))
-	print("----------------------")
+	size = int(l/2) if int(l/math.log(l,2)) > 5 else int(l*4)
+	
+	if int(l/2) > 499:
+		size = int(l/math.log(l,2)) 
+	
+	for i in range(size):
+		info = [random.randint(0,1) for _ in range(l)]
+		crom = Cromosoma(info,i,bag,c)
+		p.generacion += [crom]
+	return p
 
-def printResultadoTabla(optimo,obtenido,error,iteracion,tiempo,file):
-	print("=================================================================================================================")
-	print("Problema: "+file)
-	print("=================================================================================================================")
-	print("||\t Optimo \t|\t Resultado \t|\t Error \t|\t Iteracion \t|\t Tiempo \t||")
-	print("-----------------------------------------------------------------------------------------------------------------")
-	print("||\t"+str(optimo)+"\t\t|\t"+str(obtenido)+"\t\t|\t"+str(truncate(error*100,3))+"%\t|\t"+str(iteracion)+"\t\t|\t"+str(truncate(tiempo,5))+"\t\t||")
+def CorrerSGA(maxI,pCruce,pMutar,scale,nombre):
+	[C,V,opt] = openFile(scale,nombre)
+	[sga,i,t,e] = SGA(C,V,maxI,pCruce,pMutar,opt)
+	return int(opt),sga.beneficio,e,i,t
 
-
-def comparar(a,b):
-	dif = []
-	for i in range(len(a.info)):
-		if not a.info[i] == b.info[i]:
-			dif += [i]
-	return dif
-
-def CorrerSGA(maxIt,pCruce,pMutar,tCura,scale,nombre):
-
-	ruta   ="../../"+scale+"/"+nombre
-	rutaOp ="../../"+scale+"-optimum/"+nombre
-
-	archivo   = open(ruta  , "r")
-	archivoOp = open(rutaOp, "r")
-
-	linea   = archivo.readline()
-	lineaOp = archivoOp.readline()
-
-	optimo = lineaOp
-
-	capacidad = linea.split(" ")[1]
-	capacidad = int(capacidad.split('\ ')[0])
-
-	l=[]
-	for linea in archivo.readlines():
-		b,p=int(linea.split(" ")[0]),int((linea.split(" ")[1]).split('\ ')[0])
-		l=l+[(b,p)]
-
-	l = l[0:len(l)-1]
-
-	[opSGA,j,t,e] = SGA(capacidad,l,maxIt,pCruce,pMutar,tCura,optimo)
-	#printResultado(optimo,opSGA.beneficio,e,j,t)
-
-	return int(optimo),opSGA.beneficio,e,j,t
-
-def promedios(iMax,c,m,t,times,scale,nombres):
-	add = 0.005
+def promedios(iMax,c,m,times,scale,nombres,mode,limits = ""):
+	style = 't' if '-t' in sys.argv else 'e' if '-e' in sys.argv else 'n'
+	
 	for f in nombres:
-		optimos = [0]*times
-		opSGAs = [0]*times
-		es = [0]*times
-		its = [0]*times
-		ts = [0]*times
-		for k in range(times):
-			[optimos[k],opSGAs[k],es[k],its[k],ts[k]] = CorrerSGA(iMax,c,m,t+add,scale,f)
-			add += 0.003
+		resultados = []
+		for _ in range(times):
+			resultados.append(CorrerSGA(iMax,c,m,scale,f))
 
-		optimoP = int(sum(optimos)/len(optimos))
-		opSGAP = sum(opSGAs)/len(opSGAs)
-		eP = sum(es)/len(es)
-		itP = sum(its)/len(its)
-		tP = sum(ts)/len(ts)
-		#printResultado(optimoP,opSGAP,eP,itP,tP,f)
-		printResultadoTabla(optimoP,opSGAP,eP,itP,tP,f)
+		promedios = [ sum([ resultados[i][j] for i in range(len(resultados)) ])/len(resultados) for j in range(5) ]
+		printResultado(f,style,mode,times,scale,limits,opt=int(promedios[0]),sga=truncate(promedios[1],2),err=truncate(promedios[2]*100,3),ite=promedios[3],tim=truncate(promedios[4],4))
+		
+		if '-d' in sys.argv:
+			printResultado(f,'d',mode,times,scale,limits,resultados= resultados)
 
-def correr(iMax,c,m,times):
-	print('=================================================================================================================\n\n\n LOW DIMENSION \n\n\n=================================================================================================================')
+def runLow(iMax,c,m,times):
+	mode = "screen"
+	if '-f' in sys.argv:
+		mode = 'file'
 	nombres_low = ["f4_l-d_kp_4_11","f3_l-d_kp_4_20","f9_l-d_kp_5_80","f7_l-d_kp_7_50","f6_l-d_kp_10_60","f1_l-d_kp_10_269","f2_l-d_kp_20_878","f10_l-d_kp_20_879","f8_l-d_kp_23_10000"]
-	promedios(iMax,c,m,0.955,times,"low-dimensional",nombres_low)
+	promedios(iMax,c,m,times,"low-dimensional",nombres_low,mode)
 
-	print('=================================================================================================================\n\n\n LARGE SCALE \n\n\n=================================================================================================================')	
+def runLarge(iMax,c,m,times,setProblems):	
+	nombres = [ ["knapPI_"+str(i+1)+"_"+ str(j) +"_1000_1" for j in setProblems] for i in range(3)]
 
-	print('=================================================================================================================\n\n UNCORRELATED \n\n=================================================================================================================')
-	nombres_large_u_500 = ["knapPI_1_100_1000_1","knapPI_1_200_1000_1","knapPI_1_500_1000_1"]
-	nombres_large_u_1000_10000 = ["knapPI_1_1000_1000_1","knapPI_1_2000_1000_1","knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u_500)
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u_1000_10000)
+	mode = "screen"
+	limits = ""
+	if '-f' in sys.argv:
+		limits = str(setProblems[0])+'-'+str(setProblems[-1])
+		mode = 'file'
+
+	if mode == "screen":
+		printTitle('UNCORRELATED')
+	promedios(iMax,c,m,times,"large_scale",nombres[0],mode,limits)
 	
-	print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
-	nombres_large_w_500 = ["knapPI_2_100_1000_1","knapPI_2_200_1000_1","knapPI_2_500_1000_1"]
-	nombres_large_w_1000_10000 = ["knapPI_2_1000_1000_1","knapPI_2_2000_1000_1","knapPI_2_5000_1000_1","knapPI_2_10000_1000_1"]
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w_500)
-	promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w_1000_10000)
+	if mode == "screen":
+		printTitle('WEAKLY')
+	promedios(iMax,c,m,times,"large_scale",nombres[1],mode,limits)
 	
-	print('=================================================================================================================\n\n STRONGLY \n\n=================================================================================================================')
-	nombres_large_s_500 = ["knapPI_3_100_1000_1","knapPI_3_200_1000_1","knapPI_3_500_1000_1"]
-	nombres_large_s_1000_10000 = ["knapPI_3_1000_1000_1","knapPI_3_2000_1000_1","knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
-	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s_500)
-	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s_1000_10000)
+	if mode == "screen":
+		printTitle('STRONGLY')
+	promedios(iMax,c,m,times,"large_scale",nombres[2],mode,limits)
 
+def _main():
+	[gen,rep,mut,times] = setParameters(sys)
+	tl    = 0
+	tL    = 0
+	Set   = [[]     ,[100,200,500],[1000,2000,5000],[]]
+	scale = ['LOW','100-500','1000-5000',""]
 
-def test(iMax,c,m,times):
-	s = str(100)
-	#print('=================================================================================================================\n\n\n PRUEBA \n\n\n=================================================================================================================')	
-
-	#print('=================================================================================================================\n\n UNCORRELATED \n\n=================================================================================================================')
-	nombres_large_u = ["knapPI_1_100_1000_1","knapPI_1_200_1000_1","knapPI_1_500_1000_1","knapPI_1_1000_1000_1","knapPI_1_2000_1000_1","knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
-	#nombres_large_u = ["knapPI_1_"+s+"_1000_1"]
-	#promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_u)
+	if '--low' in sys.argv:
+		if not '-f' in sys.argv:
+			printTitle(scale[0] +'('+str(times)+')')
+		runLow(gen,rep,mut,times)
 	
-	#print('=================================================================================================================\n\n WEAKLY \n\n=================================================================================================================')
-	nombres_large_w = ["knapPI_2_100_1000_1","knapPI_2_200_1000_1","knapPI_2_500_1000_1","knapPI_2_1000_1000_1","knapPI_2_2000_1000_1","knapPI_2_5000_1000_1","knapPI_2_10000_1000_1"]
-	#nombres_large_w = ["knapPI_2_"+s+"_1000_1"]
-	#promedios(iMax,c,m,0.955,times,"large_scale",nombres_large_w)
+	if '--500' in sys.argv:
+		times = int(times/2)
+		if not '-f' in sys.argv:
+			printTitle( scale[1] +'('+str(times)+')')
+		runLarge(gen,rep,mut,times,Set[1])
 	
-	print('=================================================================================================================\n\n STRONGLY \n\n=================================================================================================================')
-	nombres_large_s = ["knapPI_3_100_1000_1","knapPI_3_200_1000_1","knapPI_3_500_1000_1","knapPI_3_1000_1000_1","knapPI_3_2000_1000_1","knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
-	#nombres_large_s = ["knapPI_3_"+s+"_1000_1"]
-	promedios(iMax,c,m,0.999,times,"large_scale",nombres_large_s)
+	if '--1000' in sys.argv:
+		times = int(times/4)
+		if not '-f' in sys.argv:
+			printTitle( scale[2] +'('+str(times)+')')
+		runLarge(gen,rep,mut,times,Set[2])
+	
+	if '--test' in sys.argv:
+		times = int(times/4)
+		if not '-f' in sys.argv:
+			printTitle( scale[3] +'('+str(times)+')')
+		Set[3]   = [int(sys.argv[sys.argv.index('--test')+1])]
+		scale[3] = [str(Set[3][0])+'(test)']
+		runLarge(gen,rep,mut,times,Set[3])
 
-
-correr(40,0.85,0.001,5)
-#test(40,0.85,0.001,5)
-
-
+_main()

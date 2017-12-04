@@ -18,31 +18,7 @@ class Cromosoma:
 	def diagnosticar(self,cap):
 		self.salud = self.peso <= cap
 
-	def curar(self,bag,cap,tol):
-		'''
-		rnd = random.sample([i for i in range(0,len(bag)-1)],int(len(bag)/2))
-
-		r = (self.beneficio/self.peso)
-		d = int(len(bag)/2)
-		m = cap/d
-
-		took1 = False
-		took2 = False
-
-		for i in rnd:
-			if not took2:
-				if self.info[i] == 1:
-					self.info[i] = 0
-					self.beneficio -= bag[i][0]
-					self.peso -= bag[i][1]
-					took1 = True
-				else:
-					if took1:
-						self.info[i] = 1
-						self.beneficio += bag[i][0]
-						self.peso += bag[i][1]
-						took2 = True
-		'''
+	def curar(self,bag,cap):
 		mayor = (-10,-10)
 		for i in range(len(self.info)):
 			if self.info[i] == 1 and mayor[0] < (bag[i][1]/bag[i][0]):
@@ -52,13 +28,13 @@ class Cromosoma:
 		self.pesar(bag,cap)
 
 	def pesar(self,bag,cap):
-		self.beneficio = 0
-		self.peso = 0
-		for i in range(len(self.info)):
-			self.beneficio += self.info[i]*bag[i][0]
-			self.peso += self.info[i]*bag[i][1]
+		newB = sum([self.info[i]*bag[i][0] for i in range(len(self.info)) ])
+		newP = sum([self.info[i]*bag[i][1] for i in range(len(self.info)) ])
 
-		self.beneficio -= (self.peso - cap)
+		self.peso      = newP
+		self.diagnosticar(cap)
+		self.beneficio = newB - (self.peso - cap) if not self.salud else newB
+
 
 	def mutar(self,chance,bag,cap):
 		p = random.random()

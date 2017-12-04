@@ -11,21 +11,7 @@ class Poblacion:
 		self.beneficios = []
 		self.pesos = []
 		self.errores = []
-		self.tipo = None
 		self.Populate()
-
-
-	def Identify(self):
-		unique = []
-		for t in self.bag:
-			diff = abs(t[1]-t[0])
-			if not diff in unique:
-				unique += [diff]
-		print(sorted(unique))
-		lu = len(unique)
-		lb = len(self.bag)
-		e = abs(lb-lu)/lb
-		print(e)
 
 	def Populate(self):
 		self.beneficios = []
@@ -35,13 +21,12 @@ class Poblacion:
 			self.beneficios += [c.beneficio]
 			self.pesos += [c.peso]
 
-	def Health(self,tol):
+	def Health(self):
 		for c in self.generacion:
-			k = 0
-			while (not c.salud) and (k < len(self.bag)):
-				c.curar(self.bag,self.capacidad,tol)
+
+			while not c.salud:
+				c.curar(self.bag,self.capacidad)
 				c.diagnosticar(self.capacidad)
-				k += 1
 		self.Populate()
 
 	def Error(self,op):
@@ -59,9 +44,8 @@ class Poblacion:
 
 	def Check(self):
 		for c in self.generacion:
-			if (self.beneficios.count(c.beneficio)/len(self.generacion) > 0.90) :
+			if (self.beneficios.count(c.beneficio)/len(self.generacion) > 0.85) :
 				return True
-
 		return False
 
 	def Select(self):
@@ -74,8 +58,9 @@ class Poblacion:
 				wheel += [((b/total)*100,b)]*self.beneficios.count(b)
 		wheel = sorted(wheel)
 
-		#rnd = random.sample(wheel,2)
-		rnd = [wheel[0],wheel[len(wheel)-2]]
+		r1 = random.randint(0,len(wheel)-2)
+		r2 = random.randint(r1+1,len(wheel)-1)
+		rnd = [wheel[r1],wheel[r2]]
 
 		p1 = self.beneficios.index(rnd[0][1])
 		p2 = self.beneficios.index(rnd[1][1])
