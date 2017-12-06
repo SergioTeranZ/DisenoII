@@ -40,7 +40,7 @@ def Evaluar_Vecindad(vecindad,elementos,capacidad):
 			capacidad=capacidad-elementos[i][1]*vecindad[i]
 
 	if capacidad<0:
-		beneficio_acual=beneficio_acual + capacidad*int(math.sqrt(-1*capacidad))/16
+		beneficio_acual=beneficio_acual + capacidad*2
 
 
 	return beneficio_acual
@@ -99,13 +99,13 @@ def cambiar_solucion(Sol):
 
 
 
-nombres2=["knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
-
+#nombres2=["knapPI_3_5000_1000_1","knapPI_3_10000_1000_1"]
+nombres2=['f1_l-d_kp_10_269',"f2_l-d_kp_20_878","f3_l-d_kp_4_20","f4_l-d_kp_4_11","f6_l-d_kp_10_60","f7_l-d_kp_7_50","f8_l-d_kp_23_10000","f9_l-d_kp_5_80","f10_l-d_kp_20_879"]
 #,"knapPI_1_5000_1000_1","knapPI_1_10000_1000_1"]
 
 for i in nombres2:
 
-	ruta="../large_scale/"+i
+	ruta="../low-dimensional/"+i
 
 	archivo = open(ruta, "r")
 
